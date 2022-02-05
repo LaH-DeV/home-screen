@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="images/favicon_32.png" sizes="32px" />
+    <link rel="icon" href="images/favicon_192.png" sizes="192px" />
+    <script src="script.js" defer></script>
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="loader-wrapper">
+      <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+
+    <div class="book small">
+      <div class="cover">
+        <div class="cover-content">
+          <img src="./images/logo.svg" alt="logo" />
+          <h2>Starting page</h2>
+          <p>Lah.Dev</p>
+        </div>
+      </div>
+      <div class="last-page"></div>
+      <div id="page-blank" class="page"></div>
+      <div class="back-cover"></div>
+    </div>
+    <script>
+      $(window).on("load", function () {
+        $(".loader").fadeOut("slow");
+        setTimeout(() => {
+          $(".loader-wrapper").fadeOut("slow");
+          $(".book").animate({ opacity: 1 }, 800);
+          $(".cover-content").animate({ opacity: 1 }, 2400);
+        }, 400);
+      });
+    </script>
+  </body>
+</html>

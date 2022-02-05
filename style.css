@@ -1,0 +1,414 @@
+@import url("https://fonts.googleapis.com/css?family=Pirata+One&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.loader-wrapper {
+  position: absolute;
+  inset: 0;
+  background-color: #353755;
+  z-index: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  border: 4px solid #fff;
+  animation: loader 2s infinite ease;
+}
+
+.loader-inner {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background-color: #fff;
+  animation: loader-inner 2s infinite ease-in;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(180deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-inner {
+  0% {
+    height: 0%;
+  }
+
+  25% {
+    height: 0%;
+  }
+
+  50% {
+    height: 100%;
+  }
+
+  75% {
+    height: 100%;
+  }
+
+  100% {
+    height: 0%;
+  }
+}
+
+body {
+  cursor: default;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(0 0 0 / 0.45), rgba(0 0 0 / 0.65)),
+    url("./images/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  perspective: 1500px;
+}
+
+::selection {
+  color: wheat;
+  background-color: #7f3300;
+}
+
+.book {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  opacity: 0;
+  transform: rotateX(15deg) translateX(-250px);
+  transition: transform 1s ease;
+}
+
+.cover-content {
+  opacity: 0;
+}
+
+.book.open {
+  transform: translateX(50%) rotateX(15deg);
+}
+
+.cover.open {
+  transform: rotateX(15deg) rotateY(-180deg);
+}
+
+.cover.closed:after {
+  content: "";
+  inset: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 4px 4px 40px 4px;
+  background: linear-gradient(
+    #353755,
+    #464866,
+    #62658b,
+    #3d428f,
+    wheat,
+    #515488,
+    #464b96,
+    #5056af #353755
+  );
+  opacity: 1;
+  animation: coverRotation2 0.3s forwards;
+}
+
+@keyframes coverRotation2 {
+  0% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.cover.open:after {
+  content: "";
+  inset: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 4px 4px 40px 4px;
+  background: linear-gradient(
+    #353755,
+    #464866,
+    #62658b,
+    #3d428f,
+    wheat,
+    #515488,
+    #464b96,
+    #5056af #353755
+  );
+  opacity: 1;
+  animation: coverRotation 0.3s forwards;
+}
+
+@keyframes coverRotation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#page-blank {
+  transition: transform 0.5s 0.05s;
+}
+
+.content-blank {
+  transform: rotateY(180deg);
+  height: 90%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.content-date {
+  height: 10%;
+}
+
+#blank-logo {
+  max-width: 30%;
+}
+
+.greet-heading {
+  color: #7f3300;
+  font-family: "Pirata One", sans-serif;
+  font-size: 5rem;
+  text-align: center;
+  margin: 40px 60px;
+}
+
+.name-span {
+  transition: color 0.15s;
+  color: #292827;
+}
+
+.name-span:hover {
+  color: #83634d;
+}
+
+.cover.closed ~ #page-blank {
+  animation: blankPage2 0.156s forwards;
+}
+
+@keyframes blankPage2 {
+  0% {
+    opacity: 1;
+    z-index: 2;
+  }
+  70% {
+    opacity: 0.5;
+    z-index: 0;
+  }
+  100% {
+    opacity: 0;
+    z-index: 0;
+  }
+}
+
+.cover.open ~ #page-blank {
+  background: wheat;
+  transform: rotateX(15deg) rotateY(-180deg);
+  animation: blankPage 0.3s forwards;
+}
+
+@keyframes blankPage {
+  0% {
+    z-index: 0;
+  }
+  70% {
+    z-index: 0;
+  }
+  100% {
+    z-index: 2;
+  }
+}
+
+.cover,
+.back-cover {
+  height: 600px;
+  width: 520px;
+  background: #353755;
+  background: linear-gradient(
+    #353755,
+    #464866,
+    #62658b,
+    #3d428f,
+    wheat,
+    #515488,
+    #464b96,
+    #5056af #353755
+  );
+  border-radius: 4px 4px 40px 4px;
+  position: absolute;
+  box-shadow: 0 0 200px 1px #38230f inset, 0 0 200px 50px #353755 inset,
+    5px 10px 5px #11111a;
+  transform: rotateX(15deg);
+  transform-origin: center left;
+}
+
+.page,
+.last-page {
+  height: 560px;
+  width: 500px;
+  background: rgb(211, 189, 147);
+  box-shadow: 0 0 120px rgba(39, 39, 39, 0.9) inset, 0 0 240px #8a4d0f inset,
+    20px 10px 50px 1px rgb(77, 68, 51), 5px 10px 5px rgb(16, 16, 25);
+  position: absolute;
+  z-index: -1;
+  transform: rotateX(15deg);
+  border-radius: 4px 20px 20px 4px;
+  transform-origin: center left;
+}
+
+.last-page {
+  z-index: -2;
+}
+
+.cover {
+  z-index: 1;
+  transition: transform 0.6s ease;
+}
+.back-cover {
+  z-index: -3;
+}
+
+.cover img {
+  width: 250px;
+  opacity: 0.7;
+  display: block;
+  margin: 60px auto;
+  z-index: -1;
+  position: relative;
+}
+
+.cover p {
+  margin-top: 80px;
+  font-size: 1.5rem;
+  text-align: center;
+  color: rgb(173, 166, 153);
+  font-family: "Pirata One", sans-serif;
+}
+
+.cover h2 {
+  text-align: center;
+  color: rgb(223, 200, 159);
+  font-size: 5rem;
+  font-family: "Pirata One", sans-serif;
+}
+
+.links-container {
+  padding: 20px;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all ease 0.3s;
+}
+
+#choose-heading {
+  font-family: "Pirata One", sans-serif;
+  font-size: 3.6rem;
+  text-align: center;
+  margin: 20px 35px;
+}
+
+.choose-span {
+  color: #292827;
+  transition: color 0.15s;
+}
+
+.choose-span:hover {
+  color: rgb(187, 87, 40);
+}
+
+a {
+  margin: 10px;
+  font-size: 1.5rem;
+  color: #292827;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(187, 87, 40);
+  text-decoration: underline;
+}
+
+i {
+  margin-right: 10px;
+}
+
+a.yt:hover {
+  color: #bb001b;
+}
+a.gg:hover {
+  color: #9c780b;
+}
+a.gm:hover {
+  color: #ea4335;
+}
+a.tr:hover {
+  color: #34a853;
+}
+a.fb:hover {
+  color: #3b5998;
+}
+a.nt:hover {
+  color: #7b2783;
+}
+a.td:hover {
+  color: #35e9e9;
+}
+
+.date {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 5%;
+  position: absolute;
+  font-family: "Pirata One", sans-serif;
+  color: #7f3300;
+}
+
+.book.small {
+  transform: scale(0.3);
+}
